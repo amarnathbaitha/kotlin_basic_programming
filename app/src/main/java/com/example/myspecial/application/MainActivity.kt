@@ -60,7 +60,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(
     showBackground = true,
-    //device = "spec:width=720dp,height=1080dp,dpi=420"
+    device = "spec:width=720dp,height=1080dp,dpi=420"
 )
 @Preview(
     showBackground = true,
