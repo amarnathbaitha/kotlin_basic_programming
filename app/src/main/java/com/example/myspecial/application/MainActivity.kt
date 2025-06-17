@@ -58,7 +58,6 @@ fun Greeting(modifier: Modifier = Modifier) {
         )
 
     }
-
 }
 
 @Preview(
