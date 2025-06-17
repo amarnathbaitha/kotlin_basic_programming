@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Special Application</string>
+    <string name="hello_learners">Hello learners</string>
+    <string name="message_text">Email %s and password is %s</string>
 </resources>

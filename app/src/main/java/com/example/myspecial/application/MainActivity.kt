@@ -22,6 +22,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myspecial.application.lession.StringPlaceholderComposable
+import com.example.myspecial.application.ui.theme.AppTheme
 import com.example.myspecial.application.ui.theme.MySpecialApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,10 +31,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MySpecialApplicationTheme {
+            AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    StringPlaceholderComposable(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
