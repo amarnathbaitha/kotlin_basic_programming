@@ -22,6 +22,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myspecial.application.lession.SnackBar
+import com.example.myspecial.application.ui.theme.AppTheme
 import com.example.myspecial.application.ui.theme.MySpecialApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,8 +34,8 @@ class MainActivity : ComponentActivity() {
             MySpecialApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                        name = "Amar",
+                        modifier = Modifier.padding(innerPadding),
                     )
                 }
             }
@@ -43,7 +45,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,7 +81,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 )
 @Composable
 fun GreetingPreview() {
-    MySpecialApplicationTheme {
+    AppTheme  {
         Greeting("Android")
     }
 }
