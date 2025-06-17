@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Special Application</string>
+    <string name="form_data">Hi %s, your favorite color is %s and your favorite snacks is %s</string>
 </resources>

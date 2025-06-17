@@ -1,6 +1,4 @@
 package com.example.myspecial.application
-
-import androidx.compose.ui.res.stringResource
 import org.junit.Test
 
 fun isEven(a:Int):String{

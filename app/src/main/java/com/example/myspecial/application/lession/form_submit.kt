@@ -3,6 +3,7 @@ package com.example.myspecial.application.lession
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -23,40 +24,53 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.myspecial.application.R
 import com.example.myspecial.application.ui.theme.AppTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun SnackBar(
+fun Challenges(
     modifier: Modifier = Modifier,
     scope: CoroutineScope,
     snackBarHostState: SnackbarHostState
 ){
-    var email by remember { mutableStateOf("") }
-     var pasword by remember { mutableStateOf("") }
+    var firstName by remember { mutableStateOf("") }
+     var favouriteColor by remember { mutableStateOf("") }
+    var favouriteSnack by remember { mutableStateOf("") }
+    val message = stringResource(R.string.form_data,firstName,favouriteColor,favouriteSnack)
     Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize().padding(16.dp),
+       // verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
 
         TextField(
-            value = email,
-            onValueChange = { email = it
+            value = firstName,
+            onValueChange = { firstName = it
             },
-            label = {Text(text = "email")},
-            placeholder = { Text(text = "Enter your email address") }
+            label = {Text(text = "firstName")},
+            placeholder = { Text(text = "Enter your FirstName") }
         )
-
+       Spacer(modifier = Modifier.padding(16.dp))
         TextField(
-            value = pasword,
-            onValueChange = {pasword = it},
-            label = {Text(text = "password")},
-            placeholder = {Text(text = "Enter your password")}
+            value = favouriteColor,
+            onValueChange = {favouriteColor = it},
+            label = {Text(text = "color")},
+            placeholder = {Text(text = "Favourite color")}
             )
+        Spacer(modifier = Modifier.padding(16.dp))
+        TextField(
+            value = favouriteSnack,
+            onValueChange = {favouriteSnack = it},
+            label = {Text(text = "snack")},
+            placeholder = { Text(text = "Favourite snacks") }
 
+        )
+        Spacer(modifier = Modifier.padding(16.dp))
         val context = LocalContext.current
         val controller = LocalSoftwareKeyboardController.current
         Button(
@@ -69,14 +83,14 @@ fun SnackBar(
                        actionLabel = "View SnackBar"
                    )
                     if(result == SnackbarResult.ActionPerformed){
-                        Toast.makeText(context,"Toast Message",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
                     }
                 }
 
             },
 
             ) {
-            Text(text = "Click me")
+            Text(text = "Submit")
         }
     }
 }
@@ -96,7 +110,7 @@ fun SnackBarPreview(){
         )
         {
             padding->
-            SnackBar(
+            Challenges(
                 modifier = Modifier.padding(padding),
                 scope = scope,
                 snackBarHostState = snackBarHostState
