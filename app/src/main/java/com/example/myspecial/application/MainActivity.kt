@@ -63,7 +63,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,b
+        verticalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
         Switch(
