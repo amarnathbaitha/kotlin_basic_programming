@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -19,7 +20,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -50,10 +53,7 @@ fun TwoTreesApp() {
             modifier = Modifier.fillMaxSize(),
         )
         { innerPadding ->
-            var isChecked by remember{ mutableStateOf(true) }
-            val image1 = "https://fastly.picsum.photos/id/13/2500/1667.jpg?hmac=SoX9UoHhN8HyklRA4A3vcCWJMVtiBXUg0W4ljWTor7s"
-            val image2 = "https://fastly.picsum.photos/id/9/5000/3269.jpg?hmac=cZKbaLeduq7rNB8X-bigYO8bvPIWtT-mh8GRXtU3vPc"
-            val finalImage = if(isChecked) image1 else image2
+            val imageId:MutableState<Int> = remember { mutableIntStateOf(R.drawable.baby) }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -61,18 +61,18 @@ fun TwoTreesApp() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Switch(
-                    onCheckedChange = { isChecked = it },
-                    checked = isChecked
-                )
-                AsyncImage(
-                    model = finalImage,
-                    contentDescription = null,
-                )
+
+                Image(painter = painterResource(imageId.value), contentDescription = "")
+                Button(onClick = {
+                   imageId.value =  if(imageId.value == R.drawable.baby)R.drawable.logo else R.drawable.mommy
+                }) {
+                    Text(text = "Swap Image")
+                }
             }
         }
     }
 }
+
 
 @Preview(
     showBackground = true,
