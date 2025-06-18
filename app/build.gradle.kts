@@ -59,5 +59,7 @@ dependencies {
 //    implementation(libs.timber)
 //    implementation(libs.glide)
 //    implementation(libs.retrofit)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(kotlin("test"))
 }
