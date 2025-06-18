@@ -59,11 +59,11 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     var checked by remember { mutableStateOf(true) }
-    val resourceId = if(checked) R.drawable.logo else R.drawable.baby
+    val resourceId = if(checked) R.drawable.brand else R.drawable.baby
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Center,b
         modifier = modifier.fillMaxSize()
     ) {
         Switch(
