@@ -61,5 +61,7 @@ dependencies {
 //    implementation(libs.retrofit)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.androidx.lifecycle.viewModel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(kotlin("test"))
 }
