@@ -12,14 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
@@ -46,7 +44,7 @@ fun TwoTreesApp() {
         { innerPadding ->
 
             val viewModel = viewModel<MainViewModel>()
-            var productImageId by remember { mutableIntStateOf(R.drawable.logo) }
+            val productImageId by viewModel.productImageId.collectAsStateWithLifecycle()
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -58,7 +56,9 @@ fun TwoTreesApp() {
                 AsyncImage(
                     contentDescription = null,
                     model = ImageRequest.Builder(LocalContext.current).data(productImageId).build(),
-                    modifier = Modifier.clickable { productImageId = viewModel.generateNewImageId() }
+                    modifier = Modifier.clickable {
+                        viewModel.generateNewImageId()
+                    }
                 )
             }
         }
