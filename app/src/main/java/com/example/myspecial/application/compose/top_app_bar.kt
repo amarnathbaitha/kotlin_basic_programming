@@ -5,8 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -21,7 +24,9 @@ import com.example.myspecial.application.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarUI() {
+fun TopAppBarUI(
+    sharedButton:()-> Unit
+) {
     var context = LocalContext.current
     TopAppBar(
         title = { Text(text = "Hi") },
@@ -45,7 +50,15 @@ fun TopAppBarUI() {
                     }
             )
         },
+        actions = {
+            IconButton(onClick = sharedButton) {
+                Icon(imageVector = Icons.Filled.Share, contentDescription = "Share button", tint = Color.White)
+
+            }
+
+        }
 
         )
 }
+
 

@@ -1,5 +1,7 @@
 package com.example.myspecial.application
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -36,10 +38,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TwoTreesApp() {
+    val context = LocalContext.current
     MySpecialApplicationTheme {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            topBar = { TopAppBarUI() }
+            topBar = { TopAppBarUI(
+                sharedButton = {sharedApp(context)}
+            ) }
         )
         { innerPadding ->
 
@@ -76,4 +81,13 @@ fun MyComposableNexusPreview() {
     MySpecialApplicationTheme {
         TwoTreesApp()
     }
+}
+
+// This is the example of implicit Intent
+fun sharedApp(context:Context){
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT,"Checkout my page for further implementation")
+    }
+    context.startActivity(intent)
 }
