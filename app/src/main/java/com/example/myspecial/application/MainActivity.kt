@@ -14,11 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myspecial.application.compose.Description
-import com.example.myspecial.application.compose.HomePage
 import com.example.myspecial.application.compose.TopAppBarUI
 import com.example.myspecial.application.ui.theme.MySpecialApplicationTheme
 

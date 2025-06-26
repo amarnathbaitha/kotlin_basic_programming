@@ -19,7 +19,11 @@ fun CustomNavHostController(modifier: Modifier = Modifier,navHostController: Nav
         startDestination = "home"
     ) {
         composable(route = "home") {
-            HomePage()
+            HomePage(
+               nextDescriptionScreen = {
+                    navHostController.navigate(route = "des")
+               }
+            )
         }
         composable(route = "des") {
             Description()
