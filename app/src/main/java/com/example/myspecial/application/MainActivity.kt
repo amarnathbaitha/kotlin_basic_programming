@@ -15,6 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.myspecial.application.compose.CustomNavHostController
+import com.example.myspecial.application.compose.MyBottomBar
 import com.example.myspecial.application.compose.TopAppBarUI
 import com.example.myspecial.application.ui.theme.MySpecialApplicationTheme
 
@@ -33,19 +35,19 @@ fun TwoTreesApp() {
     val context = LocalContext.current
 
     MySpecialApplicationTheme {
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            topBar = {
-                TopAppBarUI(
-                    sharedButton = { sharedApp(context) }
-                )
-            }
+        Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
+            TopAppBarUI(
+                sharedButton = { sharedApp(context) })
+        }, bottomBar = {
+            MyBottomBar()
+        }
+
         )
+
         { innerPadding ->
             val navHostController = rememberNavController()
             CustomNavHostController(
-                navHostController = navHostController,
-                modifier = Modifier.padding(innerPadding)
+                navHostController = navHostController, modifier = Modifier.padding(innerPadding)
             )
 
         }
@@ -54,9 +56,7 @@ fun TwoTreesApp() {
 
 
 @Preview(
-    showBackground = true,
-    device = Devices.NEXUS_5,
-    name = "Nexus 5"
+    showBackground = true, device = Devices.NEXUS_5, name = "Nexus 5"
 )
 @Composable
 fun MyComposableNexusPreview() {
