@@ -5,30 +5,31 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.two.trees.ui.compose.ShopScreen
+import com.example.myspecial.application.MainViewModel
 
 @Composable
 fun TwoTreesNavHost(
     navController: NavHostController,
+    viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
-        startDestination = "home",
+        startDestination = Screen.Home.route,
         modifier = modifier
     ) {
-        composable(route = "home") {
+        composable(route = Screen.Home.route) {
             HomeScreen(
                 takeTourClick = {
-                    navController.navigate("tours")
+                    navController.navigate(Screen.Tours.route)
                 }
             )
         }
-        composable(route = "tours") {
+        composable(route = Screen.Tours.route) {
             ToursScreen()
         }
-        composable(route = "shop") {
-            ShopScreen()
+        composable(route = Screen.Shop.route) {
+            ShopScreen(viewModel = viewModel)
         }
     }
 }
