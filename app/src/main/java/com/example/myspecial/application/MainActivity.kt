@@ -15,10 +15,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.myspecial.application.compose.CustomNavHostController
-import com.example.myspecial.application.compose.MyBottomBar
-import com.example.myspecial.application.compose.TopAppBarUI
-import com.example.myspecial.application.ui.theme.MySpecialApplicationTheme
+import com.example.myspecial.application.ui.compose.TwoTreesAppBar
+import com.example.myspecial.application.ui.compose.TwoTreesBottomBar
+import com.example.myspecial.application.ui.compose.TwoTreesNavHost
+import com.example.two.trees.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,44 +32,53 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TwoTreesApp() {
-    val context = LocalContext.current
+    AppTheme {
+        val navController = rememberNavController()
 
-    MySpecialApplicationTheme {
-        Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-            TopAppBarUI(
-                sharedButton = { sharedApp(context) })
-        }, bottomBar = {
-            MyBottomBar()
-        }
-
-        )
-
-        { innerPadding ->
-            val navHostController = rememberNavController()
-            CustomNavHostController(
-                navHostController = navHostController, modifier = Modifier.padding(innerPadding)
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            topBar = {
+                val context = LocalContext.current
+                TwoTreesAppBar(
+                    appName = R.string.app_name,
+                    shareWithFriends = {
+                        shareWithFriends(context)
+                    }
+                )
+            },
+            bottomBar = {
+                TwoTreesBottomBar(
+                    navController = navController
+                )
+            }
+        ) { innerPadding ->
+            TwoTreesNavHost(
+                navController = navController,
+                modifier = Modifier.padding(innerPadding)
             )
-
         }
     }
 }
 
-
-@Preview(
-    showBackground = true, device = Devices.NEXUS_5, name = "Nexus 5"
-)
-@Composable
-fun MyComposableNexusPreview() {
-    MySpecialApplicationTheme {
-        TwoTreesApp()
-    }
-}
-
-// This is the example of implicit Intent
-fun sharedApp(context: Context) {
+fun shareWithFriends(context: Context) {
     val intent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
-        putExtra(Intent.EXTRA_TEXT, "Checkout my page for further implementation")
+        putExtra(
+            Intent.EXTRA_TEXT,
+            "Check out my favorite olive oil place!"
+        )
     }
+
     context.startActivity(intent)
+}
+
+@Preview(
+    showBackground = true,
+    device = Devices.PIXEL_5,
+)
+@Composable
+fun TwoTreesAppPreview() {
+    AppTheme {
+        TwoTreesApp()
+    }
 }

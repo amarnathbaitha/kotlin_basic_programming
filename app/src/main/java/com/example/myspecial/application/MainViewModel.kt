@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.random.Random
 
-private const val  TAG = "MainViewModel"
+private const val TAG = "MainViewModel"
 
 class MainViewModel : ViewModel() {
 
@@ -14,17 +14,17 @@ class MainViewModel : ViewModel() {
     val productImageId: StateFlow<Int> = _productImageId
 
     init {
-        Log.i(TAG,"initialized")
+        Log.i(TAG, "initialized")
     }
 
-    fun generateNewImageId(){
-        Log.i(TAG,"generateNewImageId")
-        _productImageId.value  = when(Random.nextInt(4)){
-             0 -> R.drawable.logo
-             1 -> R.drawable.cat
-             2 -> R.drawable.ic_stat_name
-             3 -> R.drawable.mommy
-            else -> R.drawable.mommy
+    fun generateNewImageId() {
+        Log.i(TAG, "generateNewImageId")
+        _productImageId.value = when(Random.nextInt(4)) {
+            0 -> R.drawable.delicate_olive_oil
+            1 -> R.drawable.lemon_olive_oil
+            2 -> R.drawable.chili_olive_oil
+            3 -> R.drawable.basil_olive_oil
+            else -> R.drawable.logo
         }
     }
 }
