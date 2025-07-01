@@ -39,17 +39,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.myspecial.application.MainViewModel
 import com.example.myspecial.application.R
+import com.example.myspecial.application.data.ProductRepository
 
 import com.example.two.trees.ui.theme.AppTheme
 import com.example.two.trees.ui.theme.accent
 
 @Composable
 fun ShopScreen(
-    viewModel: MainViewModel,
     modifier: Modifier = Modifier,
 ) {
-    val quantity by viewModel.quantity.collectAsStateWithLifecycle()
-    val totalAmount by viewModel.totalAmount.collectAsStateWithLifecycle()
 
     LazyVerticalGrid(
         modifier = modifier.fillMaxSize(),
@@ -63,41 +61,7 @@ fun ShopScreen(
         item {
             FreeShipping()
         }
-        item {
-            QuantityButtons(
-                increaseQuantity = { viewModel.increaseQuantity() },
-                decreaseQuantity = { viewModel.decreaseQuantity() }
-            )
-        }
-        item {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp),
-                text = "Total cans: $quantity",
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-        item {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp),
-                text = "Total amount: $$totalAmount.00",
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-        item {
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { viewModel.checkout() }
-            ) {
-                Text(
-                    text = "Checkout",
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-        }
+
     }
 }
 
@@ -192,6 +156,6 @@ fun FreeShipping(modifier: Modifier = Modifier) {
 @Composable
 fun ShopScreenPreview() {
     AppTheme {
-        ShopScreen(viewModel = MainViewModel())
+        ShopScreen()
     }
 }

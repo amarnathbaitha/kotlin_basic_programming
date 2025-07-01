@@ -29,7 +29,7 @@ fun TwoTreesNavHost(
             ToursScreen()
         }
         composable(route = Screen.Shop.route) {
-            ShopScreen(viewModel = viewModel)
+            ShopScreen()
         }
     }
 }

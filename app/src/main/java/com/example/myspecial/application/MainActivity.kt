@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.myspecial.application.data.ProductRepository
 import com.example.myspecial.application.ui.compose.TwoTreesAppBar
 import com.example.myspecial.application.ui.compose.TwoTreesBottomBar
 import com.example.myspecial.application.ui.compose.TwoTreesNavHost
@@ -40,13 +41,16 @@ fun TwoTreesApp() {
         val navController = rememberNavController()
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
+        val context = LocalContext.current
 
-        val viewModel = viewModel<MainViewModel>()
+        val viewModel: MainViewModel = viewModel(
+            factory = MainViewModelFactory(ProductRepository(context = context ))
+        )
 
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
-                val context = LocalContext.current
+
                 TwoTreesAppBar(
                     appName = R.string.app_name,
                     shareWithFriends = {
