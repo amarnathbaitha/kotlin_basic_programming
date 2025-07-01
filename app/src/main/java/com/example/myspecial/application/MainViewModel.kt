@@ -2,6 +2,7 @@ package com.example.myspecial.application
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.myspecial.application.data.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -17,7 +18,15 @@ class MainViewModel : ViewModel() {
     val totalAmount: StateFlow<Int> = _totalAmount
 
     init {
+        val product = Product(
+            name = "MilkBikies",
+            imageFile = "Image",
+            description = "This is the nice biscuit",
+            size = 12,
+            price = 25.0
+        )
         Log.i(TAG, "initialized")
+        Log.i(TAG,product.toString())
     }
 
     fun increaseQuantity() {
