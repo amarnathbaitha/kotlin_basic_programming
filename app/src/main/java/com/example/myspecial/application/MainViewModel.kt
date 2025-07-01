@@ -18,10 +18,13 @@ class MainViewModel(private val productRepository: ProductRepository) : ViewMode
             size = 12,
             price = 25.0
         )
-        val data =  productRepository.getTextFromTheAssets(fileName = "olive_oils_data.json")
+        val data =  productRepository.getProduct(fileName = "olive_oils_data.json")
         Log.i(TAG, "initialized")
         Log.i(TAG, product.toString())
-        Log.i(TAG,data)
+        data?.forEach {
+            Log.i(TAG,"Product Name ${it.name}")
+        }
+
     }
 
 }
