@@ -5,24 +5,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.myspecial.application.data.Product
 import com.example.myspecial.application.data.ProductRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 private const val TAG = "MainViewModel"
 
 class MainViewModel(private val productRepository: ProductRepository) : ViewModel() {
 
+    private val _product = MutableStateFlow(emptyList<Product>())
+    val product : StateFlow<List<Product>> = _product
+
     init {
-        val product = Product(
-            name = "MilkBikies",
-            imageFile = "Image",
-            description = "This is the nice biscuit",
-            size = 12,
-            price = 25.0
-        )
+
         val data =  productRepository.getProduct(fileName = "olive_oils_data.json")
-        Log.i(TAG, "initialized")
-        Log.i(TAG, product.toString())
-        data?.forEach {
-            Log.i(TAG,"Product Name ${it.name}")
+        data?.let {
+           _product.value = it
         }
 
     }

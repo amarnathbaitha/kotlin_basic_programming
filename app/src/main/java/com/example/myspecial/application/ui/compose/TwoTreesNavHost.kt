@@ -1,7 +1,9 @@
 package com.example.myspecial.application.ui.compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,6 +15,8 @@ fun TwoTreesNavHost(
     viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
+    val products by viewModel.product.collectAsStateWithLifecycle()
+
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route,
@@ -29,7 +33,7 @@ fun TwoTreesNavHost(
             ToursScreen()
         }
         composable(route = Screen.Shop.route) {
-            ShopScreen()
+            ShopScreen(products = products)
         }
     }
 }
