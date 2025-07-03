@@ -66,6 +66,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+    implementation(libs.retrofit) // Or the latest stable version
+    implementation (libs.converter.moshi )// Use the latest stable version
+
+
 
     implementation(kotlin("test"))
 }

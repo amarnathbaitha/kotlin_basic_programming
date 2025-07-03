@@ -1,7 +1,5 @@
 package com.example.myspecial.application.ui.compose
 
-import com.example.myspecial.application.data.Product
-
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,11 +21,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myspecial.application.R
+import com.example.myspecial.application.data.Products
 import com.example.two.trees.ui.theme.AppTheme
 
 @Composable
 fun ShopScreen(
-    products: List<Product>,
+    products: List<Products>,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -88,19 +87,21 @@ fun FreeShipping(modifier: Modifier = Modifier) {
 @Composable
 fun ShopScreenPreview() {
     val products = listOf(
-        Product(
-            name = "Carla Montoya",
-            imageFile = "fabellas",
+        Products(
+            title = "Carla Montoya",
+            image = "fabellas",
             description = "varius",
-            size = 7963,
-            price = 14.15
+            id = 7963,
+            price = 14.15,
+            category ="This is category"
         ),
-        Product(
-            name = "Julia McCormick",
-            imageFile = "tristique",
+        Products(
+            title = "Julia McCormick",
+            image = "tristique",
             description = "alterum",
-            size = 7143,
-            price = 18.19
+            id = 7143,
+            price = 18.19,
+            category = "This is another category"
         )
     )
     AppTheme {
