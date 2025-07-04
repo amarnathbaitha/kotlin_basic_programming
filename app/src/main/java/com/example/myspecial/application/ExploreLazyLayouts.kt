@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
@@ -100,6 +101,27 @@ fun MyLazyGrid(modifier: Modifier = Modifier) {
 private fun MyLazyGridPreview() {
     AppTheme {
         MyLazyGrid()
+    }
+}
+
+@Composable
+fun MyLazyVerticallyGrid(modifier: Modifier = Modifier) {
+    LazyVerticalGrid (
+        modifier = modifier.fillMaxSize(),
+        //This grid will take dynamically space based on the row size
+        columns = GridCells.Adaptive(minSize = 128.dp),
+    ) {
+        items(count = 8) {
+            MyItem()
+        }
+    }
+}
+
+@Preview(showBackground = true, widthDp = 600, heightDp = 400)
+@Composable
+private fun MyLazyVerticallyGridPreview() {
+    AppTheme {
+        MyLazyVerticallyGrid()
     }
 }
 
