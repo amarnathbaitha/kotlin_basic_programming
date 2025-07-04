@@ -1,5 +1,7 @@
 package com.example.myspecial.application.ui.compose
 
+
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -8,7 +10,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.myspecial.application.MainViewModel
+import com.example.myspecial.application.data.Products
 
+const val TAG = "TwoTreesNavHost"
 @Composable
 fun TwoTreesNavHost(
     navController: NavHostController,
@@ -33,7 +37,10 @@ fun TwoTreesNavHost(
             ToursScreen()
         }
         composable(route = Screen.Shop.route) {
-            ShopScreen(products = products)
+            ShopScreen(
+                products = products,
+                onProductClick = {  },
+            )
         }
     }
 }

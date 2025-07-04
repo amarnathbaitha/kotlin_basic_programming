@@ -1,6 +1,7 @@
 package com.example.myspecial.application.ui.compose
 
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +37,7 @@ import java.text.NumberFormat
 @Composable
 fun ShopScreen(
     products: List<Products>,
+    onProductClick: (product: Products) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -52,7 +54,12 @@ fun ShopScreen(
             FreeShipping()
         }
         itemsIndexed(products) { index, product ->
-            ProductItem(product = product)
+            ProductItem(
+                product = product,
+                onProductClick = {
+                    Log.i(TAG,"The selected product is $product")
+                }
+            )
         }
 
     }
@@ -61,9 +68,10 @@ fun ShopScreen(
 @Composable
 fun ProductItem(
     product: Products,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onProductClick: (product: Products) -> Unit
 ) {
-    ElevatedCard(modifier = modifier) {
+    ElevatedCard(modifier = modifier, onClick = { onProductClick(product) }) {
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -111,11 +119,12 @@ private fun ProductItemPreview() {
                 description = "varius",
                 id = 7963,
                 price = 14.15,
-                category ="This is category"
-            )
+                category = "This is category"
+            ), onProductClick = {}
         )
     }
 }
+
 @Composable
 private fun ShopLabel() {
     Text(
@@ -158,7 +167,7 @@ fun ShopScreenPreview() {
             description = "varius",
             id = 7963,
             price = 14.15,
-            category ="This is category"
+            category = "This is category"
         ),
         Products(
             title = "Julia McCormick",
@@ -170,6 +179,6 @@ fun ShopScreenPreview() {
         )
     )
     AppTheme {
-        ShopScreen(products = products)
+        ShopScreen(products = products, onProductClick = {})
     }
 }
