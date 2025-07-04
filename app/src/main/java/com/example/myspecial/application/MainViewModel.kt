@@ -17,12 +17,19 @@ class MainViewModel(private val productRepository: ProductRepository) : ViewMode
     private val _product = MutableStateFlow(emptyList<Products>())
     val product : StateFlow<List<Products>> = _product
 
+    private val _selectedProduct = MutableStateFlow<Products?>(null)
+    val selectedProduct: StateFlow<Products?> = _selectedProduct
+
     init {
         viewModelScope.launch {
             _product.value =  productRepository.getProduct()
             Log.i(TAG,_product.value.toString())
         }
 
+    }
+
+    fun selectedProduct(products: Products){
+        _selectedProduct.value = products
     }
 
 }
