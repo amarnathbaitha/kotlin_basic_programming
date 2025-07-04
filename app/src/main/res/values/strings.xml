@@ -22,4 +22,5 @@
     <string name="take_a_tour">Take a tour!</string>
     <string name="shop_label">Shop</string>
     <string name="free_shipping_label">Free shipping on all orders</string>
+    <string name="product_category">%d Category</string>
 </resources>
