@@ -1,6 +1,7 @@
 package com.example.myspecial.application.data
 
 import android.content.Context
+import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -15,7 +16,7 @@ interface ProductApi{
     suspend fun getProduct(): Response<List<Products>>
 }
 const val BASE_ENDPOINT_URL = "https://fakestoreapi.com/"
-
+const val TAG = "ProductRepository"
 class ProductRepository(private val context: Context) {
 
 
@@ -34,6 +35,7 @@ class ProductRepository(private val context: Context) {
     }
 
     private fun storeDataInFile(products: List<Products>){
+        //deSerialized
         val listType = Types.newParameterizedType(List::class.java, Products::class.java)
         val fileContent = moshi.adapter<List<Products>>(listType).toJson(products)
 
@@ -44,9 +46,30 @@ class ProductRepository(private val context: Context) {
 
     }
 
+    private fun readDataFromFile():List<Products>{
+        val file = File(context.cacheDir,"product.json")
+        val json = if(file.exists()) file.readText() else null
+
+        return  if(json==null)
+                emptyList()
+        else{
+            //Serialized
+            val listType = Types.newParameterizedType(List::class.java, Products::class.java)
+            moshi.adapter<List<Products>>(listType).fromJson(json).orEmpty()
+        }
+
+
+    }
+
     suspend fun getProduct():List<Products>{
+        val productFromCache = readDataFromFile()
+        if(productFromCache.isNotEmpty()){
+            Log.d(TAG,"Load from the cache")
+            return productFromCache
+        }
         val response = productApi.getProduct()
         return if(response.isSuccessful) {
+            Log.d(TAG,"Load from the Webservices")
             val product  = response.body()
                 product?.let {
                     storeDataInFile(it)
