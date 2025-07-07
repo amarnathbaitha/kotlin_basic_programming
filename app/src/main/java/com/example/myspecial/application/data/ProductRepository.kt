@@ -1,6 +1,7 @@
 package com.example.myspecial.application.data
 
 import android.content.Context
+import android.os.Environment
 import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -34,20 +35,33 @@ class ProductRepository(private val context: Context) {
         retrofit.create(ProductApi::class.java)
     }
 
+    private fun isExternalStorageAvailable(): Boolean{
+        return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
+    }
+
     private fun storeDataInFile(products: List<Products>){
+        // This checks is for external storage
+        if(!isExternalStorageAvailable()) return
         //deSerialized
         val listType = Types.newParameterizedType(List::class.java, Products::class.java)
         val fileContent = moshi.adapter<List<Products>>(listType).toJson(products)
 
         //val file = File(context.filesDir,"product.json")
         //Once you change to filesDir to cacheDir, After installing the app it will remove the storage data too.
-        val file = File(context.cacheDir,"product.json")
+        // This is internal file
+        //val file = File(context.cacheDir,"product.json")
+
+        //Example of external file system
+        val file = File(context.getExternalFilesDir("product"),"product.json")
+
         file.writeText(fileContent, charset = Charsets.UTF_8)
 
     }
 
     private fun readDataFromFile():List<Products>{
-        val file = File(context.cacheDir,"product.json")
+        // This checks is for external storage
+        if(!isExternalStorageAvailable()) return emptyList()
+        val file = File(context.getExternalFilesDir("product"),"product.json")
         val json = if(file.exists()) file.readText() else null
 
         return  if(json==null)
