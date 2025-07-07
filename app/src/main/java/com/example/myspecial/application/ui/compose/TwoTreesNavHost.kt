@@ -12,14 +12,16 @@ import androidx.navigation.compose.composable
 import com.example.myspecial.application.MainViewModel
 import com.example.myspecial.application.data.Products
 
-const val TAG = "TwoTreesNavHost"
+
+private const val TAG = "TwoTreesNavHost"
+
 @Composable
 fun TwoTreesNavHost(
     navController: NavHostController,
     viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
-    val products by viewModel.product.collectAsStateWithLifecycle()
+    val products by viewModel.products.collectAsStateWithLifecycle()
     val selectedProduct by viewModel.selectedProduct.collectAsStateWithLifecycle()
 
     NavHost(
@@ -42,16 +44,19 @@ fun TwoTreesNavHost(
                 products = products,
                 onProductClick = { product: Products ->
                     Log.i(TAG, "The selected product: $product")
-                    viewModel.selectedProduct(product)
+                    viewModel.selectProduct(product)
                     navController.navigate(Screen.Product.route)
-                },
+                }
             )
         }
         composable(route = Screen.Product.route) {
             selectedProduct?.let {
-            ProductScreen(product = it)
+                ProductScreen(
+                    product = it,
+                    incrementQuantityClick = { viewModel.incrementQuantity() },
+                    decrementQuantityClick = { viewModel.decrementQuantity() },
+                )
             }
         }
-        }
-
+    }
 }

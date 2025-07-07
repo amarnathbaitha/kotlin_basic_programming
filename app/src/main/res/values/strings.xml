@@ -23,4 +23,6 @@
     <string name="shop_label">Shop</string>
     <string name="free_shipping_label">Free shipping on all orders</string>
     <string name="product_category">%d Category</string>
+    <string name="add_to_cart_label">(+) Add</string>
+    <string name="remove_from_cart_label">(-) Remove</string>
 </resources>
